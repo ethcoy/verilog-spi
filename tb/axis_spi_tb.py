@@ -9,6 +9,14 @@ from cocotb.triggers import RisingEdge, FallingEdge, Edge, Event, Timer
 
 from cocotb_test.simulator import run
 
+# ~ class SpiPeripheral:
+    # ~ def __init__(self, dclk, copi, cipo, en):
+        # ~ self.dclk = dclk
+        # ~ self.copi = copi
+        # ~ self.cipo = cipo
+        # ~ self.en = en
+
+
 @cocotb.test()
 async def axis_spi(dut):
     dut.i_rst.value = 0
@@ -42,7 +50,7 @@ parameters = {}
 parameters['c_DATA_WIDTH'] = 8
 
 if __name__ == "__main__":
-	run(verilog_sources = [
+    run(verilog_sources = [
             './../rtl/axis_spi.v',
         ],
         includes = [
