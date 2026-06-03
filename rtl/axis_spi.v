@@ -85,8 +85,6 @@ wire w_spi_dclk_sample_edge;
 assign w_spi_dclk_shift_edge = r_prescale == (r_shift_edge_count - 1'b1) ? 1'b1 : 1'b0;
 assign w_spi_dclk_sample_edge = r_prescale == (r_sample_edge_count - 1'b1) ? 1'b1 : 1'b0;
 
-reg r_spi_end_flag = 1'b0;
-
 localparam s_SPI_IDLE = 2'd0;
 localparam s_SPI_START = 2'd1;
 localparam s_SPI_ACTIVE = 2'd2;
