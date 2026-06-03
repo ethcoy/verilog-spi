@@ -71,8 +71,8 @@ reg [16:0] r_sample_edge_count = 17'b0;
 wire w_spi_dclk_shift_edge;
 wire w_spi_dclk_sample_edge;
 
-assign w_spi_dclk_shift_edge = r_prescale == r_shift_edge_count ? 1'b1 : 1'b0;
-assign w_spi_dclk_sample_edge = r_prescale == r_sample_edge_count ? 1'b1 : 1'b0;
+assign w_spi_dclk_shift_edge = r_prescale == (r_shift_edge_count - 1'b1) ? 1'b1 : 1'b0;
+assign w_spi_dclk_sample_edge = r_prescale == (r_sample_edge_count - 1'b1) ? 1'b1 : 1'b0;
 
 localparam s_SPI_IDLE = 2'd0;
 localparam s_SPI_START = 2'd1;
@@ -129,15 +129,15 @@ always @(posedge i_clk) begin
 
         s_SPI_ACTIVE: begin
             r_prescale <= r_prescale + 1'b1;
-            if (r_prescale == r_sample_edge_count - 1'b1) begin
+            if (w_spi_dclk_sample_edge) begin
                 m_axis_tdata_reg <= (m_axis_tdata_reg << 1'b1) | i_spi_cipo;
                 if (r_count == {c_COUNT_WIDTH{1'b0}}) begin
                     r_state <= s_SPI_WAIT;
-                    m_axis_tdata_reg <= 1'b1;
+                    r_spi_dclk <= 1'b1;
                 end
             end
 
-            if (r_prescale == r_shift_edge_count - 1'b1) begin
+            if (w_spi_dclk_shift_edge) begin
                 r_spi_copi <= s_axis_tdata_reg[r_count];
                 r_count <= r_count - 1'b1;
             end
@@ -151,7 +151,7 @@ always @(posedge i_clk) begin
 
     endcase 
 
-    if ((r_prescale == r_sample_edge_count - 1'b1;) || (r_prescale == r_shift_edge_count - 1'b1;)) begin
+    if ((r_prescale == r_sample_edge_count - 1'b1) || (r_prescale == r_shift_edge_count - 1'b1)) begin
         r_spi_dclk <= ~r_spi_dclk;
     end
 
