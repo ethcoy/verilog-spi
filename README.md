@@ -1,2 +1,2 @@
-# Verilog SPI Master With AXI-Stream Interface
-Full-duplex SPI controller that supports all four SPI modes, has a parameterizable frame length and has an AXI-stream interface.
+# Verilog SPI Controller With AXI-Stream Interface
+This repository contains a Verilog implementation of a full-duplex SPI controller that supports all four SPI modes, has a parameterizable frame length, runtime adjustable SPI clock frequency, and an AXI-stream interface. Future improvements will be to add user controlled timing between edges of the SPI chip select and edges of the SPI clock and user controlled timing between transactions. 
