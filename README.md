@@ -1,2 +1,2 @@
 # Verilog SPI Master With AXI-Stream Interface
-This repository contains a parameterizable Verilog SPI implementation with an AXI-stream interface.
+Full-duplex SPI controller that supports all four SPI modes, has a parameterizable frame length and has an AXI-stream interface.
