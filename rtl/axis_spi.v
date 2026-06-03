@@ -1,3 +1,13 @@
+/*
+
+In the future: 
+
+- Add inputs that allow the user to adjust the number of clock cycles before the first and last edges of o_spi_dclk
+
+- Add an input that allows the user to adjust the minimum number of clock cycles between SPI transactions
+
+*/
+
 module axis_spi #(
     parameter c_DATA_WIDTH = 8
 ) (
@@ -152,6 +162,7 @@ always @(posedge i_clk) begin
                     if (w_spi_dclk_sample_edge) begin
                         r_spi_en <= 1'b1;
                         r_state <= s_SPI_WAIT;
+                        m_axis_tvalid_reg <= 1'b1;
                     end
                 end
                 
@@ -159,6 +170,7 @@ always @(posedge i_clk) begin
                     if (w_spi_dclk_shift_edge) begin
                         r_spi_en <= 1'b1;
                         r_state <= s_SPI_WAIT;
+                        m_axis_tvalid_reg <= 1'b1;
                     end
                 end
             end
@@ -166,7 +178,9 @@ always @(posedge i_clk) begin
 
         s_SPI_WAIT: begin
             if (m_axis_tvalid & m_axis_tready) begin
-            
+                s_axis_tready_reg <= 1'b1;
+                m_axis_tvalid_reg <= 1'b0;
+                r_state <= s_SPI_IDLE;
             end
         end
 

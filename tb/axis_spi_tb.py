@@ -24,10 +24,18 @@ async def axis_spi(dut):
     dut.i_clk_polarity.value = 1
     dut.i_clk_phase.value = 1
     
-    dut.i_prescale.value = 4
+    dut.i_prescale.value = 10
     
     await Timer(100, unit='ns')
     cocotb.start_soon(Clock(dut.i_clk, 10, unit="ns").start())
+    
+    while (True):
+        await RisingEdge(dut.i_clk)
+        if (int(dut.m_axis_tvalid.value)):
+            dut.s_axis_tdata.value = 0x44
+            dut.i_spi_cipo.value = 0
+            break
+    
     await Timer(2000, unit='ns')
 
 parameters = {}
