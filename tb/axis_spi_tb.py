@@ -33,7 +33,11 @@ async def axis_spi(dut):
     dut.i_clk_phase.value = 1
     
     dut.i_prescale.value = 10
-    
+    dut.i_en_setup_time.value = 1
+    dut.i_en_hold_time.value = 10
+    dut.i_en_high_time.value = 0
+
+
     await Timer(100, unit='ns')
     cocotb.start_soon(Clock(dut.i_clk, 10, unit="ns").start())
     
