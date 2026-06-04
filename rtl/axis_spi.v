@@ -237,7 +237,6 @@ always @(posedge i_clk) begin
                 r_state <= s_SPI_IDLE;
             end
         end
-
     endcase 
 
     if (w_spi_dclk_sample_edge | w_spi_dclk_shift_edge) begin

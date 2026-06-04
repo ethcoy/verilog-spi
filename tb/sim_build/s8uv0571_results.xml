@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="0" />
-    <testcase name="axis_spi" classname="axis_spi_tb" file="/home/ecoyle/Documents/verilog-spi/tb/axis_spi_tb.py" lineno="12" time="0.004627227783203125" sim_time_ns="2100.0" ratio_time="453835.44929925806" />
-  </testsuite>
-</testsuites>
