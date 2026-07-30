@@ -22,8 +22,6 @@ SOFTWARE.
 
 */
 
-// Language: Verilog 2001
-
 module axis_spi #(
     parameter c_DATA_WIDTH = 8
 ) (
